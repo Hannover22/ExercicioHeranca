@@ -67,6 +67,7 @@ while (true)
             {
                 CadastrarConta(i);
                 verificador2 = true;
+                conta = i;
                 break;
             }
         }
@@ -87,6 +88,7 @@ while (true)
         bool verif = false;
         Console.Write("\n");
         Console.WriteLine("Banco 5by5 SA");
+        Console.WriteLine($"Conta: {contas[conta].Numero}");
         Console.WriteLine("Digite uma opcao: ");
         Console.WriteLine("1 - Depositar");
         Console.WriteLine("2 - Sacar");

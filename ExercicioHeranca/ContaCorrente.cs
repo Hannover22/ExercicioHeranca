@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Text;
 
 namespace ExercicioHeranca
 {
     public class ContaCorrente : ContaBancaria
     {
-        public decimal Limite { get; set; }
-        public decimal Saldo { get; set; }
+        public decimal Limite;
 
         public ContaCorrente(string n, string t, decimal s) : base(n, t, s)
         {
@@ -17,27 +17,34 @@ namespace ExercicioHeranca
         }
         public void SetLimite()
         {
-            this.Limite = this.Saldo * 3;
-            if(this.Saldo < 0)
+            if(Saldo < 0)
             {
-                this.Limite = 0;
+                Limite = 0;
+            }
+            else
+            {
+                Limite = Saldo * 3;
             }
         }
 
 
         public void Depositar(decimal s)
         {
-            this.Saldo = s;
+            this.Saldo += s;
+            SetLimite();
         }
         public override string Sacar(decimal valor)
         {
-            decimal maximo = Saldo * 4;
-            if(valor > maximo)
+            if (valor > this.Saldo + this.Limite)
             {
                 return "Saque impedido por exceder o limite da conta.";
             }
-            Saldo -= valor;
-            return "Saque realizado com sucesso";
+            else
+            {
+                this.Saldo = Saldo - valor;
+                SetLimite();
+                return "Saque realizado com sucesso";
+            }
         }
 
         public override string ToString()

@@ -18,7 +18,7 @@ namespace ExercicioHeranca
 
         public void Depositar(decimal s)
         {
-            this.Saldo = s;
+            this.Saldo += s;
         }
 
         public override string Sacar(decimal quantia)

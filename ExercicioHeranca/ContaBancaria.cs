@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Text;
 
 namespace ExercicioHeranca
@@ -19,19 +20,34 @@ namespace ExercicioHeranca
 
         public void Depositar(decimal quantia)
         {
-            this.Saldo += quantia;
+            Saldo += quantia;
         }
 
         public virtual string Sacar(decimal quantia)
         {
-            this.Saldo -= quantia;
-            return "Saque realizado com sucesso.";
+            if(quantia <= 0)
+            {
+                return "Valor inválido";
+            }
+            else
+            {
+                if(quantia > this.Saldo)
+                {
+                    return "Quantia insuficiente";
+                }
+                else
+                {
+                    Saldo -= quantia;
+                    return "Saque efetuado";
+                }
+            }
         }
 
         public void Transferencia(decimal quantia)
         {
             this.Saldo -= quantia;
         }
+
         public void Pagar(decimal quantia)
         {
             this.Saldo -= quantia;
